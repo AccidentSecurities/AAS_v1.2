@@ -1,0 +1,31 @@
+{% extends 'dashboard-master.html' %}
+
+{% block body_heading %}
+{% load webpush_notifications %}
+    Accident Alerts
+    <div class="banner mb-3">
+        {% webpush_button with_class="btn btn-success" %}
+    </div>  
+{% endblock %}
+
+{% block body %}
+    {% load static %}
+    {% with request.path|slice:":5" as path %}
+
+
+    {% for x in data %}
+    <div class="container-fluid text-left p-3 background alert bg-success">
+        <div class="container-fluid w-100 mb-4 pt-2 text-dark">{{x.AccidentTime}}</div>
+        <hr>
+        <a href="{% if path == '/Admi' %}/Admin-Alert-Desc/{%elif path == '/ECC-'%}/ECC-Alert-Desc/{%elif path == '/Cust'%}/Cust-Alert-Desc/{%endif%}?Aid={{x.AID}}" >
+            <div class="h5 mb-4 text-white">Accident detected at <span class="text-muted">{{x.Area}},
+                {{x.City}}</span><br>Assigned to <span class="text-muted">{{x.EID}}</span>
+            </div>
+        </a>
+        <hr>
+        <a class="pd-5 text-white" href="https://www.google.com/maps/search/?api=1&query={{x.Latitude}},{{x.Longitude}}" target="_blank">Check Location</a>
+    </div>
+    {% endfor %}
+    {% endwith %}  
+</div>
+{% endblock %}

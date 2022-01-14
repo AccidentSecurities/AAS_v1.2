@@ -1,0 +1,38 @@
+{% extends 'dashboard-master.html' %}
+
+{% block body_heading %}
+    {%if request.path == '/Admin-Customers/'%}
+        Customer
+    {%elif request.path == '/Admin-ECCs/'%}
+        ECC
+    {%endif%}
+{% endblock %}
+
+{% block body %}
+    {% load static %}
+
+        {%if request.path == '/Admin-Customers/'%}
+            {% for x  in custm %}
+                <div class="row align-items-center justify-content-center text-left">
+                    <a href="/Admin-Customer/?Cid={{x.CID}}" class="col-12 col-lg-6 alert alert-info text-dark">
+                        {{ x.Fname }} {{ x.Lname }}
+                    </a>
+                </div>
+            {% endfor %}
+
+        {%elif request.path == '/Admin-ECCs/'%}
+            <div>
+                <div class="row">
+                    <div class="col-7 pb-3"><a href="/Admin-Add-Ecc/"><button class="btn btn-info p-2">ADD ECC</button></a></div> 
+                </div>
+                {% for e in ecc %}
+                <div class="row align-items-center justify-content-center text-left">
+                    <a href="/Admin-Ecc/?Eid={{e.EID}}" class="col-12 col-lg-6 alert alert-info text text-dark ">
+                    {{ e.Name }}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+
+        {%endif%}
+{%  endblock %}

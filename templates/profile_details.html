@@ -1,0 +1,190 @@
+{% extends 'dashboard-master.html' %}
+
+{% block body_heading %}
+      {% if request.path == '/Admin-Customer/' or request.path == "/Cust-Profile/" %}
+        Customer Profile
+      {% elif request.path == '/Admin-Ecc/' or request.path == '/ECC-Profile/' %}
+        ECC Profile
+      {%elif request.path == '/Admin-Add-Ecc/'%}
+        ECC Registration
+    {%endif%}
+{% endblock %}
+
+{% block body %}
+    {% load static %}
+    <div class="row align-items-center justify-content-center">
+      <div class="col-12 col-lg-8 flex-item grid-margin">
+          <form method="post">{%  csrf_token %}
+            {% if request.path == '/Admin-Customer/' or request.path == "/Cust-Profile/" %}
+              {% with request.path|slice:":5" as path %}
+                <div>
+                  {% for x in data %}
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="inputEmail4">First Name</label>
+                      <input type="text" class="form-control" id="inputEmail4" value="{{x.Fname}}" placeholder="First Name" disabled= "disabled">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="inputPassword4">Last Name</label>
+                      <input type="text" class="form-control" id="inputPassword4" value="{{x.Lname}}" placeholder="Last Name" disabled= "disabled">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="inputEmail4">Gender</label>
+                      <input type="text" class="form-control" id="inputPassword4" value="{{x.Gender}}" placeholder="Gender" disabled="disabled">     
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label for="inputPassword4">Blood</label>
+                      <input type="text" class="form-control" id="inputPassword4" value="{{x.Blood_Group}}" placeholder="Blood Group"  disabled= "disabled">
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="inputEmail4">Birthdate</label>
+                      <input type="text" class="form-control" id="inputEmail4" value="{{x.Birthdate}}" placeholder="Birthdate"  disabled= "disabled">
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="inputAddress">Mobile</label>
+                      <input type="number" class="form-control" value="{{x.Contact}}" id="inputMobile" name="mobile" {% if path != "/Cust" %} disabled="disabled" {% endif %}>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="inputAddress">Email</label>
+                      <input type="email" class="form-control" value="{{x.UID}}" id="inputMobile" name="email" {% if path != "/Cust" %} disabled="disabled" {% endif %}>
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label for="inputAddress">Address</label>
+                      <input type="text" class="form-control" id="inputAddress" value="{{x.Address}}" placeholder="1234 Main St" name="address" {% if path != "/Cust" %} disabled="disabled" {% endif %}>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="inputCity">City</label>
+                      <input type="text" class="form-control" value="{{x.City}}" id="inputCity" name="city" {% if path != "/Cust" %} disabled="disabled" {% endif %}>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="inputCity">State</label>
+                      <input type="text" class="form-control" value="{{x.State}}" id="inputState" name="state" {% if path != "/Cust" %} disabled="disabled" {% endif %}>
+                    </div>
+                    <div class="form-group col-md-2">
+                      <label for="inputZip">Area Code</label>
+                      <input type="text" class="form-control" value="{{x.Pincode}}" id="inputZip" name="pincode" {% if path != "/Cust" %} disabled="disabled" {% endif %}>
+                    </div>
+                  </div>
+                  <div class="form-row"> 
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Vehicle Number</label>
+                      <input type="text" class="form-control" id="inputEmail4" value="{{x.vehicleNumber}}" placeholder="Vehicle Number" disabled= "disabled">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputEmail4">Vehicle Model</label>
+                      <input type="text" class="form-control" id="inputEmail4" value="{{x.VehicleModel}}" placeholder="Vehicle Model" disabled= "disabled">
+                    </div>
+                  </div>
+                {% endfor %}
+                  {% if path == "/Cust" %}<button type="submit" class="btn btn-danger ml-2">Update</button>{% endif %}
+                </div>
+              {% endwith %}
+              
+              {% elif request.path == '/Admin-Ecc/' or request.path == "/ECC-Profile/" %}
+                {% with request.path|slice:":4" as path %}
+                  <div>
+                    {% for d in data %}
+                      <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="inputPassword4">Name</label>
+                            <input type="text" class="form-control" value="{{d.Name}}" id="inputPassword4" placeholder="ECC Name" disabled="disabled">
+                        </div>
+                        <div class="form-group col-md-12">
+                              <label for="inputPassword4">State</label>
+                              <input type="text" class="form-control" value="{{d.State}}" id="inputState" placeholder="ECC State" disabled="disabled">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="inputPassword4">Mobile</label>
+                            <input type="number" class="form-control" name="contact" value="{{d.Contact}}" id="inputPassword4" placeholder="ECC Mobile" {% if path != "/ECC" %} disabled="disabled" {% endif %}>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="inputPassword4">Email</label>
+                            <input type="email" class="form-control" name="email" value="{{d.UID}}" id="inputEmail4" placeholder="ECC Email" {% if path != "/ECC" %} disabled="disabled" {% endif %}>
+                        </div>                  
+                        {% endfor %}
+                        {% if request.path == "/ECC-Profile/" %}
+                        <button class="btn btn-danger ml-2">Update</button>
+                        {% elif request.path == "/Admin-Ecc/" %}
+                        <button type="submit" class="btn btn-info mt-4">Delete ECC</button>                  
+                        {% endif %}
+                      </div>
+                  </div> 
+                {% endwith %}                
+
+              {% elif request.path == '/Admin-Add-Ecc/' %}
+                <div>
+                  <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="inputPassword4">Name</label>
+                        <input type="text" name="ecc_name" class="form-control" id="inputPassword4" placeholder="ECC Name">
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label for="inputPassword4">State</label>
+                      <input type="text" name="ecc_state" class="form-control" id="inputState" placeholder="ECC State">
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label for="inputPassword4">Mobile</label>
+                      <input type="number" name="ecc_mobile" class="form-control" id="inputPassword4" placeholder="ECC Mobile">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="inputPassword4">Email</label>
+                        <input type="Email" name="ecc_email" class="form-control" id="inputEmail4" placeholder="ECCName_AAS@gmail.com">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="inputPassword4">Password</label>
+                        <input type="Password" name="ecc_password" class="form-control" id="inputPassword4" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-info mt-2">Register</button>
+                  </div>
+                </div>
+
+            {%endif%}
+          </form>
+      </div>
+    </div>
+
+  <script type="text/javascript">
+    $(document).ready(function () {  
+      $("#changefieldsECC").on("click",function(){
+        $("#Mob").removeAttr('disabled');
+        // $("#Name").removeAttr('disabled');
+      });
+
+      $("#changefields").on("click",function(){
+        $("#Gen").removeAttr('disabled');
+        $("#Blood").removeAttr('disabled');
+        // $("#bday").removeAttr('disabled');
+        $("#Vnumber").removeAttr('disabled');
+        $("#Vmodel").removeAttr('disabled');
+        $("#Cont").removeAttr('disabled');
+        $("#Add").removeAttr('disabled');
+        $("#Zip").removeAttr('disabled');
+      });
+    
+      $("#updt").on("click",function(){  
+        var phone = $("#Cont").val();
+        intRegex = /[0-9 -()+]+$/;
+        if((phone.length < 10) || (!intRegex.test(phone)) || (phone.length >10)){
+            alert('Please enter a valid phone number.');
+            return false;
+        }  
+      });
+    
+      function dis(){
+        document.getElementById("updtfield").disabled=false;
+        document.getElementById("updtzip").disabled=false;
+      }
+      
+      function validatePhoneNumber() {
+        phone = document.getElementById("Cont");
+        alert("IM IN ",phone)
+        var re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    
+        return re.test(phone);
+      }
+    });
+    
+  </script> 
+{% endblock %}

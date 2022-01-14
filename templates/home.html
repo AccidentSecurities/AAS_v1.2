@@ -1,0 +1,400 @@
+{% extends 'home-master.html' %}
+
+{% block body %}
+    {% load static %}
+  
+    {% if request.path == '/' or request.path == '/Products/'%}
+      <!-- Header -->
+      <header id="header-section">
+        <nav class="navbar navbar-expand-lg pl-3 pl-sm-0 pt-3" id="navbar">
+        <div class="container border rounded">
+        <div class="navbar-brand-wrapper d-flex w-100 container-header-main ">
+            <div class="vertical-align">
+            <img src="{%static 'images/logo/aas-logo.png'%}" alt="" width="50px" class="img-fluid">
+            <span class="w-60 h5" style="color: #3D3B40;">Accident <span style="color: #F74D6A;">Alert</span> Securities</span>
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="mdi mdi-menu navbar-toggler-icon"></span>
+            </button> 
+            </div>
+        </div>
+        <div class="collapse navbar-collapse navbar-menu-wrapper" id="navbarSupportedContent">
+            <ul class="navbar-nav align-items-lg-center align-items-start ml-auto">
+            <li class="d-flex align-items-center justify-content-between ">
+                <div class="navbar-collapse-logo">
+                <span class="w-60 p-1 text-dark h6 header-main-text">Accident <span class="text-danger">Alert</span> Securities</span>
+                </div>
+                <button class="navbar-toggler close-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="mdi mdi-close navbar-toggler-icon pl-5"></span>
+                </button>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#Home">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#about-section">About</a>  
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Products/">Products</a>  
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contact-details-section">Contact</a>
+            </li>
+            <li class="nav-item btn-contact-us pl-4 pl-lg-0">
+                {% if lguser == none %}
+                <button class="btn btn-success" data-toggle="modal" data-target="#loginModal">Sign In</button>
+                {% elif lguser ==  "customer" %}
+                <a class="btn btn-danger" href="/Cust-Alerts/">Dashboard</a>
+                {% elif lguser ==  "super" %}
+                <a class="btn btn-danger" href="/Admin-Alerts/">Dashboard</a>
+                {% elif lguser ==  "ecc" %}
+                <a class="btn btn-danger" href="/ECC-Alerts/">Dashboard</a>
+                {% endif%}
+            </li>
+            </ul>
+        </div>
+        </div> 
+        </nav>   
+      </header>
+
+      {% if request.path == '/'%}
+        <div class="banner">
+          <!-- Hero -->
+          <div class="mb-5" id="Home">
+            <div class="container container-banner">
+              <img src="{%static 'images/backgrounds/hero.jpg'%}" alt="" class="img-fluid rounded">
+              <div class="banner-text rounded">
+                <h1 class="font-weight-semibold text-custom-info">An automated system can <span class="">save your life</span></h1>
+                <h6 class="font-weight-normal pb-3 text-white">We serve you the fastest help during vehicle accidents & medical emergencies</h6>
+                <div class="banner-btn">
+                  <a class="btn btn-success mr-1" href="/Products/">Explore System</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Other Help -->
+          <div class="my-5" id="helps-section">
+            <div class="container container-banner">
+              <img src="{%static 'images/backgrounds/medical-emergency.jpg'%}" alt="" class="img-fluid rounded">
+              <div class="banner-text rounded">
+                <h1 class="font-weight-semibold text-custom-info">AAS in Medical Emergencies</h1>
+                <h6 class="font-weight-normal pb-3 text-white">You can call a emergency medical service from Device</h6>
+                <div class="banner-btn">
+                  <a class="btn btn-danger ml-1" href="/Products/">Learn more</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mission -->
+          <div class="my-5" id="about-section">
+            <div class="container container-banner">
+              <img src="{%static 'images/backgrounds/mission.jpg'%}" alt="" class="img-fluid rounded">
+              <div class="banner-text rounded">
+                <h1 class="font-weight-semibold text-custom-info">AAS Mission</h1>
+                <h6 class="font-weight-normal text-white">Our mission is to save lives from vehicle accidents.</h6>
+                <!-- <div class="banner-btn">
+                  <a class="btn btn-dark ml-1" href="/About/">Know More</a>
+                </div> -->
+                </div>
+            </div>
+          </div>
+        </div>
+        {% elif request.path == '/Products/' %}
+          <div class="banner" id="Device" >
+
+            <!-- Device Header -->
+            <div class="container">
+              <h1 class="text-custom-info font-weight-semibold">AAS Device</h1>
+              <h6 class="font-weight-normal text-muted">A Security Based Automated Device</h6>
+              <h6 class="font-weight-normal text-muted"><hr style="width: 50%;"></h6>
+            </div>
+        
+            <!-- Device Hero -->
+            <div class="mb-5">
+              <div class="container container-banner">
+                <img src="{%static 'images/products/AAS-device.jpg'%}" alt="" class="img-fluid rounded">
+              </div>
+            </div>
+            
+            <!-- Device Details -->
+            <div class="text-center" id="contact-details-section">
+              <div class="container pb-4">
+                  <h3 class="font-weight-normal text-custom-info py-3">Product Details</h4>
+                  <div class="contact-details">
+                    <div class="row text-center text-md-left">
+                      <div class="col-12 col-md-6 col-lg-4 grid-margin">
+                        <h5 class="main-heading text-dark">Components Inside</h5>
+                        <div class="pt-2">
+                          <p class="text-muted m-0"><strong>GPS</strong>: Finds Vehicle Location</p>
+                          <p class="text-muted m-0 py-1"><strong>GSM</strong>: Give Internet Access</p>
+                          <p class="text-muted m-0 py-1"><strong>Microcontroller</strong>: Process the Data</p>
+                        </div>         
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 grid-margin border-left border-right border-dark">
+                        <h5 class="pb-2">Device Discription</h5>
+                        <p class="text-muted m-0"><strong>Manual Button</strong>: For send Manual Alerts</p>
+                        <p class="text-muted m-0 py-1"><strong>Leds</strong>: For Indicate the Process</p>
+                        <p class="text-muted m-0 py-1"><strong>Inputs</strong>: For power and connect with vehicle components</p>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4 grid-margin">
+                        <h5 class="pb-2">Price</h5>
+                        <p class="text-muted">INR 5000 (all charges included)</p>
+                        <div class="d-flex justify-content-center justify-content-md-start mt-4">
+                        <a href="#Registration1"> <button class="btn btn-danger" onclick="showcheckout()">Buy Now</button></a>
+                        </div>
+                      </div>
+                      <div class="col-12 text-muted">
+                          <strong>Note 1</strong>: If you buy AAS Device you need to confirm your Device model number at <a href="/Conf-Product/" class="text-info">This Page</a> to Get access.
+                      </div>  
+                      <div class="col-12 text-muted my-2">
+                        <strong>Note 2</strong>: Device will fit on your vehicle at delivery time and Device fitting charges are included in the Product Price.
+                      </div>  
+                      <div class="col-12 text-muted">
+                        <strong>Note 3</strong>: A Proper Documentation of the Product is given with the Product.
+                      </div>  
+                    </div>  
+                  </div>
+              </div>
+            </div>
+        
+          </div>
+          <div class="content-wrapper">
+            <div class="container">
+              <!-- Device Work -->
+              <section class="features-overview">
+                    <div class="content-header p-0 mb-5">
+                      <h2 class="text-custom-info">How does it works?</h2>
+                      <h6 class="section-subtitle text-muted m-0">How can AAS Device Save Lives?</h6>
+                    </div>
+                    <div class="d-md-flex justify-content-between">
+                      <div class="grid-margin d-flex justify-content-start">
+                        <div class="features-width">
+                          <img src="{%static 'images/svg/crash.svg'%}" alt="" class="img-icons">
+                          <h5 class="py-3">Accident<br>Detection</h5>
+                          <p class="text-muted">System detects vehicle accident <strong>Automatically</strong> with the help of vehicle's airbag system.</p>
+                        </div>
+                      </div>
+                      <div class="grid-margin d-flex justify-content-center">
+                        <div class="features-width">
+                          <img src="{%static 'images/svg/alert.svg'%}" alt="" class="img-icons">
+                          <h5 class="py-3">Give <br>Alert</h5>
+                          <p class="text-muted">After vehicle Accident detection, system gives an accident alert to vehicle and waits 15 sec for response on safely.</p>
+                        </div>
+                      </div>
+                      <div class="grid-margin d-flex justify-content-center">
+                        <div class="features-width">
+                          <img src="{%static 'images/svg/response.svg'%}" alt="" class="img-icons">
+                          <h5 class="py-3">Check <br>Response</h5>
+                          <p class="text-muted">If you feel secure after accident alert, you can avoid system emergency service by deny Accident alert.</p>
+                        </div>
+                      </div>
+                      <div class="grid-margin d-flex justify-content-end">
+                        <div class="features-width">
+                          <img src="{%static 'images/svg/message.svg'%}" alt="" class="img-icons">
+                          <h5 class="py-3">Send<br>Accident ALert</h5>
+                          <p class="text-muted">After 15 sec of wait, if alert response is dany then system stops otherwise it sends Accident alert calls the nearest emergency services.</p>
+                        </div>
+                      </div>
+                    </div>
+              </section> 
+                  
+              <!-- Registration Phase-1 -->
+              <div class="pt-5" id="Registration1" hidden="true">
+                <section class="digital-marketing-service">
+                  <div class="row align-items-center pt-5 justify-content-center border">
+                    <div class="col-12 col-lg-6 flex-item" >
+                      <h4 class="mb-5 text-center text-custom-danger">User Registration</h4>
+                      <form method="post">{% csrf_token %}
+                        <div id="personal-info-div">
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputEmail4">First Name</label>
+                              <input type="text" name="fname" class="form-control" id="inputname" placeholder="First Name">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="inputPassword4">Last Name</label>
+                              <input type="text" name="lname" class="form-control" id="inputname" placeholder="Last Name">
+                            </div>
+                          </div>
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputEmail4">Birth Date</label>
+                              <input type="date" name="birthdate" class="form-control" id="inputAge" placeholder="Birthdate">
+                            </div>
+                            <div class="form-group col-md-4">
+                                  <label for="inputEmail4">Gender</label>
+                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="Gender">
+                                  <option>Male</option>
+                                  <option>Female</option>
+                                </select>                 
+                            </div>
+                            <div class="form-group col-md-2">
+                              <label for="inputAddress">Blood</label>
+                              <input type="text" name="BG" class="form-control" id="inputBG" placeholder="A+">
+                            </div>
+                          </div>
+                            <div class="form-group">
+                              <label for="inputAddress">Mobile</label>
+                              <input type="number" name="mob" class="form-control" id="Cont" placeholder="1234567890" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="inputEmail4">Email</label>
+                              <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="name@domain.com">
+                            </div>                            
+                            <div class="form-group">
+                              <label for="inputAddress">Address</label>
+                              <input type="text" class="form-control" name="add" id="inputAddress" placeholder="1234 Main St">
+                            </div>
+                            <div class="form-row">
+                              <div class="form-group col-md-4">
+                                <label for="inputCity">City</label>
+                                <input type="text" name="city" class="form-control" id="inputCity">
+                              </div>
+                              <div class="form-group col-md-4">
+                                <label for="inputCity">State</label>
+                                <input type="text" name="state" class="form-control" id="inputState">
+                              </div>
+                              <div class="form-group col-md-4">
+                                <label for="inputZip">Area Code</label>
+                                <input type="text" name="zip" class="form-control" id="inputZip">
+                              </div>
+                            </div>
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="inputEmail4">Vehicle Model</label>
+                                <input type="text" name="vmodel" class="form-control" id="inputEmail4" placeholder="BMW X5">
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="inputPassword4">Vehicle Number</label>
+                                <input type="text" name="Vno" class="form-control" id="inputPassword4" placeholder="GJ01AB1234">
+                              </div>
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-danger mt-3 mb-5" id="checkout">Checkout</button>
+                      </form>
+                  </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+                  
+      {% endif %}
+
+      <!-- Footer -->
+      <div class="border-top" id="contact-details-section">
+        <div class="container">
+            <h1 class="font-weight-normal text-custom-info py-3">Contact Details</h1>
+            <div class="contact-details">
+              <div class="row text-center text-md-left">
+                <div class="col-12 col-md-6 col-lg-4 grid-margin">
+                  <h4 class="main-heading text-dark">Accident Alert Securities</h4>
+                  <div class="pt-2">
+                    <p class="text-muted m-0">accidentalertsecurities1@gmail.com</p>
+                    <p class="text-muted m-0 py-1">+91-8200919052</p>
+                  </div>         
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 grid-margin border-left border-right border-dark">
+                  <h5 class="pb-2">Get in Touch</h5>
+                  <form method="post">{% csrf_token %}
+                    <input type="text" name="subemail" class="form-control" id="Email" placeholder="Email id">
+                  <div class="pt-3">
+                      <button class="btn btn-dark">Subscribe</button>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 grid-margin">
+                  <h5 class="pb-2">Address</h5>
+                  <p class="text-muted">Ahmedabad, Gujrat</p>
+                  <p class="text-muted pb-1">India</p>
+                  <div class="d-flex justify-content-center justify-content-md-start mt-3">
+                    <a href="#"><span class="mdi mdi-facebook"></span></a>
+                    <a href="#"><span class="mdi mdi-twitter"></span></a>
+                    <a href="#"><span class="mdi mdi-instagram"></span></a>
+                    <a href="#"><span class="mdi mdi-linkedin"></span></a>
+                  </div>
+                </div>
+              </div>  
+            </div>
+        </div>
+      </div>
+
+    {% elif request.path == '/Conf-Product/' or  request.path == '/Check-User/' or  request.path == '/Reset-Password/' %}
+    
+      <div class="content-wrapper">
+        <div class="container"> 
+          <section class="digital-marketing-service">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 col-lg-6 flex-item grid-margin border">
+                    <div class="my-3 text-center">
+                        <span class="w-60 h3" style="color: #3D3B40;">Accident <span style="color: #F74D6A;">Alert</span> Securities</span>
+                        <hr>
+                    </div>
+                    <form method="post" class="px-5">{% csrf_token %}
+                      <div>
+                        {% if request.path == '/Conf-Product/'%}
+                          <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="inputEmail4">Email</label>
+                                    <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email" required>
+                                </div>
+                                <div class="form-group col-md-12">
+                                  <label for="inputAddress">Device Model</label>
+                                  <input type="text" name="deviceId" class="form-control" id="inputDevModNum" placeholder="Device Model" required>
+                                </div>
+                                <div class="form-group col-md-12">
+                                  <label for="inputAddress">Create Password</label>
+                                  <input type="password" name="password" class="form-control" id="inputDevModNum" placeholder="Password" required>
+                                </div>
+                          </div>
+                          <button type="submit" class="btn btn-info my-3">Confirm Product</button>
+                        {% elif request.path == '/Check-User/' %}
+                            <div class="form-row">
+                              <span class="small mb-3">Enter your user account's verified email address and we will send you a password reset OTP.</span>
+                              <div class="form-group col-md-12">
+                                    <label for="inputEmail4">Email</label>
+                                    <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="Email">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success my-3">Send OTP</button>
+                        {% elif request.path == '/Reset-Password/' %}
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="inputEmail4">OTP</label>
+                                    <input type="number" name="OTP" class="form-control" id="inputEmail4" placeholder="OTP">
+                                    <input type="text" name="OTP_passed" value="{{request.path}}">
+                                  </div>
+                                <div class="form-group col-md-12">
+                                  <label for="inputAddress">New Password</label>
+                                  <input type="password"  class="form-control" name="password" placeholder="New Password">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success my-3">Reset Password</button>
+                          {% endif %}
+                      </div>
+                    </form>
+                </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+    {% endif %}
+
+    <script type="text/javascript">
+      function showcheckout(){
+      var reg = document.getElementById("Registration1")
+      reg.removeAttribute('hidden')
+      }
+
+      $("#checkout").on("click",function(){      
+        var phone = $("#Cont").val();
+          intRegex = /[0-9 -()+]+$/;
+        if((phone.length < 10) || (!intRegex.test(phone)) || (phone.length >10)){
+            alert('Please enter a valid phone number.');
+            return false;
+        }});
+    </script>
+      
+{% endblock %}
